@@ -6,6 +6,7 @@ package com.arturoserver.projectjsf2.entity;
 /**
  * @author Arthurserver
  * Clase que representa entidades de Empleados.
+ * Probando un segundo meerge
  *
  */
 public class Empleado {
