@@ -7,36 +7,33 @@
 	<title>Pantalla Principal</title>
 	<h:outputStylesheet library="css" name="styles.css"></h:outputStylesheet>
 </h:head>
-<h:body>
-	Bienvenido a la pantalla principal
+<h:body>	
+	<p:outputLabel value="Bienvenido a la pantalla principal"></p:outputLabel>
 	
-	<h:dataTable id="tblEmpleados" var="empleado" value="#{principalController.empleados}" headerClass="headerTable" rowClasses="rowTable rowTableLine">
-		<h:column>
-			<f:facet name="header">Nombre</f:facet>
+	<p:dataTable id="tblEmpleados" var="empleado" value="#{principalController.empleados}" paginator="true" rows="10" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} registros"
+                     rowsPerPageTemplate="5,10,15" emptyMessage="No se encontraron registros" paginatorPosition="both">
+		<p:column headerText="Nombre" >			
 			<h:outputText value="#{empleado.nombre}"></h:outputText>
-		</h:column>
+		</p:column>
 		
-		<h:column>
-			<f:facet name="header">Primer Apellido</f:facet>
+		<p:column headerText="Primer Apellido">			
 			<h:outputText value="#{empleado.primerApellido}"></h:outputText>
-		</h:column>
+		</p:column>
 		
-		<h:column>
-			<f:facet name="header">Segundo Apellido</f:facet>
+		<p:column headerText="Segundo Apellido">			
 			<h:outputText value="#{empleado.segundoApellido}"></h:outputText>
-		</h:column>
+		</p:column>
 		
-		<h:column>
-			<f:facet name="header">Puesto</f:facet>
+		<p:column headerText="Puesto">			
 			<h:outputText value="#{empleado.puesto}"></h:outputText>
-		</h:column>
+		</p:column>
 		
-		<h:column>
-			<f:facet name="header">Estatus</f:facet>
+		<p:column headerText="Estatus">			
 			<h:outputText value="HABILITADO" rendered="#{empleado.estatus}"></h:outputText>
 			<h:outputText value="INHABILITADO" rendered="#{!empleado.estatus}"></h:outputText>
-		</h:column>		
-	</h:dataTable>
+		</p:column>		
+	</p:dataTable>
 	
 </h:body>
 
