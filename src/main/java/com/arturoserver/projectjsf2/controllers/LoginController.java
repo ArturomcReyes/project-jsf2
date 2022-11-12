@@ -10,9 +10,11 @@ import javax.faces.bean.*;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import com.arturoserver.projectjsf2.dto.UsuarioDTO;
+
 /**
- * @author ArturoServer Clase que permite controlar el funcionamiento con la
- *         pantalla de login.xhtml
+ * @author ArturoServer 
+ * Clase que permite controlar el funcionamiento con la pantalla de login.xhtml
  *
  */
 @ManagedBean
@@ -25,6 +27,11 @@ public class LoginController {
 	 * Contraseña ingresada en el login.
 	 */
 	private String password;
+	/**
+	 * Bean que mantiene la informacion en sesion.
+	 */
+	@ManagedProperty("#{sessionController}")
+	private SessionController sessionController;
 
 	/**
 	 * Metodo que permite ingresar a la pantalla principal del proyecto.
@@ -35,6 +42,11 @@ public class LoginController {
 		if (usuario.equals("arturo") && password.equals("server")) {
 			
 			try {
+				UsuarioDTO usuarioDTO = new UsuarioDTO();
+				usuarioDTO.setUsuario(this.usuario);
+				usuarioDTO.setPassword(this.password);
+				
+				this.sessionController.setUsuarioDTO(usuarioDTO);
 				this.redireccionar("principal.xhtml");
 			} catch (IOException e) {
 				FacesContext.getCurrentInstance().addMessage("formLogin:txtUsuario",new FacesMessage(FacesMessage.SEVERITY_FATAL, "La página no existe", ""));
@@ -78,5 +90,19 @@ public class LoginController {
 	 */
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
+	}
+
+	/**
+	 * @return the sessionController
+	 */
+	public SessionController getSessionController() {
+		return sessionController;
+	}
+
+	/**
+	 * @param sessionController the sessionController to set
+	 */
+	public void setSessionController(SessionController sessionController) {
+		this.sessionController = sessionController;
 	}
 }
